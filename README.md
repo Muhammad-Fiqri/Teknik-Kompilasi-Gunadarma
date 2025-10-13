@@ -7,4 +7,4 @@ Library Used:
 
 This project is made as a task for compilation technic college subject
 
-init: first version done, can compile 2 operand operation
+version 2: now compiler accept triple operand infix operation

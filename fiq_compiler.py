@@ -37,6 +37,11 @@ def compile(filename,verbose_mode):
                     result.append(operators[0])
                     operands.clear()
                     operators.clear()
+                if  len(result) != 0 and len(operands) > 0 and len(operators) > 0:
+                    result.append(operands[0])
+                    result.append(operators[0])
+                    operands.clear()
+                    operators.clear()
             
             if verbose_mode:
                 print("Hasil: ",result)
