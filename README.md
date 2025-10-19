@@ -22,7 +22,7 @@ save that file
 
 run the fiqri code throught fiqri compiler by running this on your Command Prompt (make sure to be on the same directory as the code):
 ```
-python fiqri_compiler.py filename.fiq
+python fiq_compiler.py filename.fiq
 ```
 
 and then the compiler will output a new file called output.fiq with the source file like this:
