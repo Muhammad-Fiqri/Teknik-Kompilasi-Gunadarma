@@ -80,9 +80,22 @@ def compile(filename,verbose_mode):
             line_count += 1
             print()
 
+    convert_result_list_to_string(result_list)
+
+
+def convert_result_list_to_string(result_list):
     with open("output.fiq", "w") as file:
         for line in result_list:
-            stringified_line = str(line)
+            #flatten each list (which is a line) in result_list
+            flattened_list = []
+            for item in line:
+                if isinstance(item, list):
+                    flattened_list.extend(item)
+                else:
+                    flattened_list.append(item)
+
+            #turn the flattened list into a string and write it into output.fiq
+            stringified_line = "".join(flattened_list)
             file.write(stringified_line+";\n")
 
 def check_if_file_exist(filename,verbose_mode):
