@@ -11,8 +11,10 @@ https://rps.gunadarma.ac.id/file/1678337194509_teknik_kompilasi_ak045335.pdf
 
 version 2: now compiler accept triple operand infix operation
 <hr>
-Language Represantation:
+
+# Language Represantation:
 https://docs.google.com/document/d/1wDsrLG6YnahcNPYhHjhIGD6TDS_hMmYYSthpdU8KMGw/edit?usp=sharing
+
 <hr>
 
 # How To Use
