@@ -9,10 +9,10 @@ This project is made as a task for compilation technic college subject
 https://rps.gunadarma.ac.id/file/1678337194509_teknik_kompilasi_ak045335.pdf
 
 version 2: now compiler accept triple operand infix operation
----
+<hr>
 Language Represantation:
 https://docs.google.com/document/d/1wDsrLG6YnahcNPYhHjhIGD6TDS_hMmYYSthpdU8KMGw/edit?usp=sharing
----
+<hr>
 # How To Use
 
 Make a file name .fiq extension which signify that it's a fiqri code and insert infix operation that ends with semicolon ";" on each line like this:
