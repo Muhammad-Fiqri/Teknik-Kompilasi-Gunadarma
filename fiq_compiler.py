@@ -1,5 +1,6 @@
 import argparse
 import os
+import string
 
 def compile(filename,verbose_mode):
     check_if_file_exist(filename,verbose_mode)
@@ -18,30 +19,58 @@ def compile(filename,verbose_mode):
             check_if_each_line_end_with_semicolon(line,line_count)
 
             operator_list = ["+","-","*","/"]
+            alphanumeric_list = list(string.ascii_letters + string.digits)
+
             tokens = list(line)
-            operands = []
+            operands1 = []
+            operands2 = []
             operators = []
             result = []
             for token in tokens:
+                #Append the 3rd+ operand and operator if result is already there
+                if len(result) > 0 and len(operators) > 0 and len(operands2) > 0 and (token == ";" or token in operator_list):
+                    print("=======================")
+                    print("3rd+ Operand Result Making")
+                    print("Operator: ",operators)
+                    print("Operand 2: ", operands2)
+                    print("=======================")
+                    result.append(operands2.copy())
+                    result.append(operators[0])
+                    operands2.clear()
+                    operators.clear()
+
+                #Append the 1st and 2nd operand and operator to the result list
+                if len(operators) > 0 and len(operands1) > 0 and len(operands2) > 0 and (token == ";" or token in operator_list):
+                    if verbose_mode:
+                        print("=======================")
+                        print("Initiating 1st Result Making:")
+                        print("Operands 1: ", operands1)
+                        print("Operands 2: ", operands2)
+                        print("Operator: ", operators)
+                        print("=======================")
+                    result.append(operands1.copy()) #if I dont use .copy() it will only link the array instead of hardcopy making the result lose it's operator
+                    result.append(operands2.copy())
+                    result.append(operators[0])
+                    operands1.clear()
+                    operands2.clear()
+                    operators.clear()
+
                 if token in operator_list:
                     if verbose_mode:
                         print(f"operator:{token}")
                     operators.append(token)
-                if not token in operator_list and token != ";":
+                if token in alphanumeric_list:
                     if verbose_mode:
                         print(f"operand:{token}")
-                    operands.append(token)
-                if len(operands) == 2:
-                    result.append(operands[0])
-                    result.append(operands[1])
-                    result.append(operators[0])
-                    operands.clear()
-                    operators.clear()
-                if  len(result) != 0 and len(operands) > 0 and len(operators) > 0:
-                    result.append(operands[0])
-                    result.append(operators[0])
-                    operands.clear()
-                    operators.clear()
+                    
+                    # if operators is empty that mean we scanning for 1st operand, if not, the 2nd operand
+                    if len(operators) == 0:
+                        operands1.append(token)
+                    else:
+                        operands2.append(token)
+                if token == ";":
+                    if verbose_mode:
+                        print(f"EOL:{token}")
             
             if verbose_mode:
                 print("Hasil: ",result)
@@ -51,9 +80,22 @@ def compile(filename,verbose_mode):
             line_count += 1
             print()
 
+    convert_result_list_to_string(result_list)
+
+
+def convert_result_list_to_string(result_list):
     with open("output.fiq", "w") as file:
         for line in result_list:
-            stringified_line = "".join(line)
+            #flatten each list (which is a line) in result_list
+            flattened_list = []
+            for item in line:
+                if isinstance(item, list):
+                    flattened_list.extend(item)
+                else:
+                    flattened_list.append(item)
+
+            #turn the flattened list into a string and write it into output.fiq
+            stringified_line = "".join(flattened_list)
             file.write(stringified_line+";\n")
 
 def check_if_file_exist(filename,verbose_mode):
