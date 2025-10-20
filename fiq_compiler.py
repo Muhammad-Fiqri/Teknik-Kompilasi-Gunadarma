@@ -27,12 +27,23 @@ def compile(filename,verbose_mode):
             operators = []
             result = []
             for token in tokens:
-                #I need to find away that this thing run only when operands are fully scanned
-                #Note 2: it does work now, but it only can accept 2 operands and then just go to the next line
+                #Append the 3rd+ operand and operator if result is already there
+                if len(result) > 0 and len(operators) > 0 and len(operands2) > 0 and (token == ";" or token in operator_list):
+                    print("=======================")
+                    print("3rd+ Operand Result Making")
+                    print("Operator: ",operators)
+                    print("Operand 2: ", operands2)
+                    print("=======================")
+                    result.append(operands2.copy())
+                    result.append(operators[0])
+                    operands2.clear()
+                    operators.clear()
+
+                #Append the 1st and 2nd operand and operator to the result list
                 if len(operators) > 0 and len(operands1) > 0 and len(operands2) > 0 and (token == ";" or token in operator_list):
                     if verbose_mode:
                         print("=======================")
-                        print("Initiating Result Making:")
+                        print("Initiating 1st Result Making:")
                         print("Operands 1: ", operands1)
                         print("Operands 2: ", operands2)
                         print("Operator: ", operators)
