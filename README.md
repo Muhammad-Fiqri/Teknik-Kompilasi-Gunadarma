@@ -44,4 +44,4 @@ AB/C*D-;
 <hr>
 
 # About:
-This compiler was made as challenge from my Compiler Technic Lectorer Ms. Puspitojadti, she said anyone that can make a compiler will be allowed to no need to do any of her task and the mid term exam, but she rejected it because she said I didn't represent the language first before making the compiler, anyone can use this compiler if she or other lectorer make this challenge, this thing is opensource with GPL/GNU License and stuff.
+This compiler was made as challenge from my Compiler Technic Lectorer Ms. Puspitodjati, she said anyone that can make a compiler will be allowed to no need to do any of her task and the mid term exam, but she rejected it because she said I didn't represent the language first before making the compiler, anyone can use this compiler if she or other lectorer make this challenge, this thing is opensource with GPL/GNU License and stuff.
