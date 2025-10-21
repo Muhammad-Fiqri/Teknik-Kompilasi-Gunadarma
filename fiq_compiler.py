@@ -1,6 +1,7 @@
 import argparse
 import os
 import string
+from sys import exit
 
 def compile(filename,verbose_mode):
     check_if_file_exist(filename,verbose_mode)
@@ -29,11 +30,12 @@ def compile(filename,verbose_mode):
             for token in tokens:
                 #Append the 3rd+ operand and operator if result is already there
                 if len(result) > 0 and len(operators) > 0 and len(operands2) > 0 and (token == ";" or token in operator_list):
-                    print("=======================")
-                    print("3rd+ Operand Result Making")
-                    print("Operator: ",operators)
-                    print("Operand 2: ", operands2)
-                    print("=======================")
+                    if verbose_mode:
+                        print("=======================")
+                        print("3rd+ Operand Result Making")
+                        print("Operator: ",operators)
+                        print("Operand 2: ", operands2)
+                        print("=======================")
                     result.append(operands2.copy())
                     result.append(operators[0])
                     operands2.clear()
