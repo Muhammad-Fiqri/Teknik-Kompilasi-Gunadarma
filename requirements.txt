@@ -1,3 +1,4 @@
 argparse
 os
 string
+pyinstaller
