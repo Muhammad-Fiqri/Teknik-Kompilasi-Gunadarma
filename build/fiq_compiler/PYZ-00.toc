@@ -1,4 +1,5 @@
-('C:\\Perkuliahan\\Teknik Kompilasi\\build\\fiq_compiler\\PYZ-00.pyz',
+('C:\\Perkuliahan\\Teknik Kompilasi\\Fiq '
+ 'Compiler\\build\\fiq_compiler\\PYZ-00.pyz',
  [('_compat_pickle',
    'C:\\FiqriProgram\\miniconda3\\Lib\\_compat_pickle.py',
    'PYMODULE'),
