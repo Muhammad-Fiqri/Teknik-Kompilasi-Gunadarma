@@ -71,6 +71,16 @@ def compile(filename,verbose_mode):
                     else:
                         operands2.append(token)
                 if token == ";":
+                    if check_if_2nd_operand_or_result_is_empty(operands2,result):
+                        print()
+                        print(f"\033[91mERROR! Pada line {line_count}\033[0m")
+                        print("Operand ke-2 tidak di temukan, hasil menjadi kosong!")
+                        print(f"Operand ke-1: {operands1}")
+                        print(f"Operand ke-2: {operands2}")
+                        print(f"Operator: {operators}")
+                        print(f"Hasil: {result}")
+                        exit()
+
                     if verbose_mode:
                         print(f"EOL:{token}")
             
@@ -83,6 +93,12 @@ def compile(filename,verbose_mode):
             print()
 
     convert_result_list_to_string(result_list)
+
+def check_if_2nd_operand_or_result_is_empty(operands2,result):
+    if len(operands2) == 0 and len(result) == 0:
+        return True
+    else:
+        return False
 
 
 def convert_result_list_to_string(result_list):
