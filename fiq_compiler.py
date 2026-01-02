@@ -2,6 +2,7 @@ import argparse
 import os
 import string
 from sys import exit
+import re
 
 def compile(filename,verbose_mode):
     check_if_file_exist(filename,verbose_mode)
@@ -17,6 +18,7 @@ def compile(filename,verbose_mode):
                 print(f"Baris {line_count}:")
                 print(line)
             
+            scanner(line,line_count,verbose_mode)
             check_if_each_line_end_with_semicolon(line,line_count)
 
             operator_list = ["+","-","*","/"]
@@ -94,6 +96,18 @@ def compile(filename,verbose_mode):
 
     convert_result_list_to_string(result_list)
 
+#this function is a scanner that will check if each line follow the infix operation rules using Regular Expression just like the lecturer wanted
+def scanner(line,line_count,verbose_mode):
+    print("Scanning line: ",line)
+    # Regular expression pattern for infix operations
+    pattern = r'^([A-Za-z0-9]|[\+\-\*\/])+;$'
+    match = re.match(pattern, line)
+    if not match:
+        print(f"\033[91mError: Line tidak sesuai format infix pada baris {line_count}\033[0m")
+        exit()
+    if match and verbose_mode:
+        print("Passed: Line sesuai format infix")
+
 def check_if_2nd_operand_or_result_is_empty(operands2,result):
     if len(operands2) == 0 and len(result) == 0:
         return True
@@ -123,7 +137,7 @@ def check_if_file_exist(filename,verbose_mode):
         if verbose_mode:
             print("Passed: File ditemukan")
     else:
-        print(f"Error: File {filename} tidak di temukan")
+        print(f"\033[91mError: File {filename} tidak di temukan\033[0m")
         exit()
 
 def check_if_extension_correct(filename,verbose_mode):
@@ -132,15 +146,16 @@ def check_if_extension_correct(filename,verbose_mode):
     file_extenstion = split_tup[1]
 
     if file_extenstion != ".fiq":
-        print("Error: ektensi kode harus berakhiran .fiq \nContoh: nama_kode.fiq")
+        print("\033[91mError: ektensi kode harus berakhiran .fiq \nContoh: nama_kode.fiq\033[0m")
         exit()
     else:
         if verbose_mode:
             print("Passed: ektensi file benar .fiq")
 
+
 def check_if_each_line_end_with_semicolon(line,line_count):
     if not line.endswith(";"):
-        print(f"Error: tidak ada ; pada baris {line_count}")
+        print(f"\033[91mError: tidak ada ; pada baris {line_count}\033[0m")
         exit()
 
 
