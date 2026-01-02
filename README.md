@@ -8,25 +8,59 @@ Library Used:
 - argparse
 - os
 - string
-- pyinstaller
+- pyinstaller (to build into an exe file)
+- re
 
-This project is made as a task for compilation technic college subject
+This project is made as a task for compilation technic college subject taught by Ms. Sulistyo Puspitodjat
 https://rps.gunadarma.ac.id/file/1678337194509_teknik_kompilasi_ak045335.pdf
+This project is a compiler that can convert infix to postfix.
 
-version 4: compiler when getting input in already postfix format (AB+;) will still accept it and return ";", need to be fix.
-apparently when I checked using verbose mode this is what it says:
+version 5: according to my Lecturer Ms. Sulistyo Puspitodjati, my compiler still accept other wrong input like:
 ```
-Passed: File ditemukan
-Passed: ektensi file benar .fiq
-Baris 1:
-AB+;
-operand:A
-operand:B
-operator:+
-EOL:;
-Hasil:  []
+AB+ 
+-AB
+ab;;
 ```
-the result/hasil list is empty, therefore to fix this I just need to give an error on the CLI when it's already EOL, but the 2nd operand is empty or the result is empty.
+
+When I checked with verbose mode, this is what it say:
+```
+AB+
+```
+Output:
+```
+Compiling: kode.fiq! with verbose mode: False
+Error: tidak ada ; pada baris 1
+```
+
+```
+-AB
+```
+Output:
+```
+Compiling: kode.fiq! with verbose mode: False
+Error: tidak ada ; pada baris 1
+```
+
+```
+ab;;
+```
+Output:
+```
+Compiling: kode.fiq! with verbose mode: False
+
+ERROR! Pada line 1
+Operand ke-2 tidak di temukan, hasil menjadi kosong!
+Operand ke-1: ['a', 'b']
+Operand ke-2: []
+Operator: []
+Hasil: []
+```
+
+It seems like lecturer want each input to be 100% similar to syntax of infix, therefore I will use a RegEx to check the input before being compiled:
+```
+^([A-Za-z0-9]|[\+\-\*\/])+;$
+```
+She said this thing is called a "Scanner" or some short, therefore I will apply it on version 5.
 <hr>
 
 # Language Represantation:
